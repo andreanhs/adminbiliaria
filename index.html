@@ -127,6 +127,7 @@
 
   /* ---------- PHOTO PANEL (placeholder atmospheric, with micro-interaction) ---------- */
   .photo-panel{position:relative; overflow:hidden; background:var(--black);}
+  .photo-panel.has-photo::after{display:none;}
   .photo-panel::after{
     content:""; position:absolute; inset:0; pointer-events:none; opacity:0.05; z-index:1;
     background-image:
@@ -139,7 +140,7 @@
   .photo-panel.mood-b .surface{background:linear-gradient(200deg,#1c1b18 0%,#0d0d0d 55%,#241b13 100%);}
   .photo-panel.mood-c .surface{background:linear-gradient(120deg,#171613 0%,#0d0d0d 60%);}
   .photo-panel.mood-d .surface{background:linear-gradient(165deg,#20201d 0%,#0d0d0d 50%,#1a140d 100%);}
-  .photo-panel img.surface{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-panel img.surface{object-fit:cover; display:block;}
   .photo-panel .photo-scrim{
     position:absolute; inset:0; z-index:1; pointer-events:none;
     background:
@@ -471,7 +472,7 @@
         <p>Conozcamos las características de tu activo y diseñemos el esquema de administración adecuado.</p>
         <a href="#/contacto" data-route="contacto" class="btn on-dark">Solicitar una propuesta <span class="btn-arrow">→</span></a>
       </div>
-      <div class="final-photo photo-panel mood-c">
+      <div class="final-photo photo-panel mood-c has-photo">
         <img class="surface" src="images/hablemosdetupropiedad.jpg" alt="Fachada de un activo bajo administración de Adminbiliaria">
         <div class="photo-scrim"></div>
       </div>
@@ -500,7 +501,7 @@
             <span>Años de experiencia en el mercado inmobiliario — desde 2011</span>
           </div>
         </div>
-        <div class="photo-panel mood-b" style="aspect-ratio:4/5;">
+        <div class="photo-panel mood-b has-photo" style="aspect-ratio:4/5;">
           <img class="surface" src="images/nosotros.jpg" alt="Detalle arquitectónico de un activo bajo administración de Adminbiliaria">
           <div class="photo-scrim"></div>
         </div>
@@ -643,7 +644,7 @@
         <div class="metodo-step"><span class="num">02</span><div><h3>Diseñamos</h3><p>Definimos el esquema de administración adecuado para ese activo en particular.</p></div></div>
       </div>
 
-      <div class="metodo-photo photo-panel mood-d reveal">
+      <div class="metodo-photo photo-panel mood-d has-photo reveal">
         <img class="surface" src="images/metodologia.jpg" alt="Área común de un activo bajo administración de Adminbiliaria">
         <div class="photo-scrim"></div>
       </div>
