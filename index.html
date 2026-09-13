@@ -139,6 +139,13 @@
   .photo-panel.mood-b .surface{background:linear-gradient(200deg,#1c1b18 0%,#0d0d0d 55%,#241b13 100%);}
   .photo-panel.mood-c .surface{background:linear-gradient(120deg,#171613 0%,#0d0d0d 60%);}
   .photo-panel.mood-d .surface{background:linear-gradient(165deg,#20201d 0%,#0d0d0d 50%,#1a140d 100%);}
+  .photo-panel img.surface{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-panel .photo-scrim{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.58) 100%),
+      radial-gradient(130% 90% at 50% 100%, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0) 60%);
+  }
   .photo-panel .accent-edge{position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--orange); opacity:0.9; z-index:2;}
   .photo-note{position:absolute; right:16px; bottom:14px; z-index:2; font-size:12px; letter-spacing:0.05em; color:rgba(247,244,239,0.55); text-transform:uppercase; font-weight:600;}
 
@@ -465,8 +472,8 @@
         <a href="#/contacto" data-route="contacto" class="btn on-dark">Solicitar una propuesta <span class="btn-arrow">→</span></a>
       </div>
       <div class="final-photo photo-panel mood-c">
-        <div class="surface"></div>
-        <span class="photo-note">Fotografía arquitectónica — por integrar</span>
+        <img class="surface" src="images/hablemosdetupropiedad.jpg" alt="Fachada de un activo bajo administración de Adminbiliaria">
+        <div class="photo-scrim"></div>
       </div>
     </div>
   </section>
@@ -493,8 +500,9 @@
             <span>Años de experiencia en el mercado inmobiliario — desde 2011</span>
           </div>
         </div>
-        <div class="photo-panel mood-b" style="aspect-ratio:4/5;"><div class="surface"></div>
-          <span class="photo-note">Fotografía arquitectónica — por integrar</span>
+        <div class="photo-panel mood-b" style="aspect-ratio:4/5;">
+          <img class="surface" src="images/nosotros.jpg" alt="Detalle arquitectónico de un activo bajo administración de Adminbiliaria">
+          <div class="photo-scrim"></div>
         </div>
       </div>
 
@@ -635,8 +643,9 @@
         <div class="metodo-step"><span class="num">02</span><div><h3>Diseñamos</h3><p>Definimos el esquema de administración adecuado para ese activo en particular.</p></div></div>
       </div>
 
-      <div class="metodo-photo photo-panel mood-d reveal"><div class="surface"></div>
-        <span class="photo-note">Fotografía arquitectónica — por integrar</span>
+      <div class="metodo-photo photo-panel mood-d reveal">
+        <img class="surface" src="images/metodologia.jpg" alt="Área común de un activo bajo administración de Adminbiliaria">
+        <div class="photo-scrim"></div>
       </div>
 
       <div class="reveal">
