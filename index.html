@@ -681,7 +681,7 @@
         <div class="contact-info-list">
           <div class="row">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5c0 9 7 16 16 16l2-4-5-3-2 2c-2-1-4-3-5-5l2-2-3-5z"/></svg>
-            <div><span class="label">WhatsApp</span><span class="value"><a href="https://wa.me/5218100000000" target="_blank" rel="noopener">[ Configurar enlace de WhatsApp ]</a></span></div>
+            <div><span class="label">WhatsApp</span><span class="value"><a href="https://wa.me/528121046592" target="_blank" rel="noopener">+52 81 2104 6592</a></span></div>
           </div>
           <div class="row">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/></svg>
@@ -703,16 +703,16 @@
 
         <form onsubmit="submitContactForm(event, this)">
           <div class="form-row">
-            <div class="field floating"><input type="text" placeholder=" " required><label>Nombre</label></div>
-            <div class="field floating"><input type="text" placeholder=" "><label>Empresa</label></div>
+            <div class="field floating"><input type="text" name="nombre" placeholder=" " required><label>Nombre</label></div>
+            <div class="field floating"><input type="text" name="empresa" placeholder=" "><label>Empresa</label></div>
           </div>
           <div class="form-row">
-            <div class="field floating"><input type="email" placeholder=" " required><label>Email</label></div>
-            <div class="field floating"><input type="tel" placeholder=" "><label>Teléfono</label></div>
+            <div class="field floating"><input type="email" name="email" placeholder=" " required><label>Email</label></div>
+            <div class="field floating"><input type="tel" name="telefono" placeholder=" "><label>Teléfono</label></div>
           </div>
           <div class="field">
             <label>Tipo de condominio</label>
-            <select>
+            <select name="tipo_condominio">
               <option>Condominio residencial</option>
               <option>Torre / condominio vertical</option>
               <option>Fraccionamiento o coto residencial</option>
@@ -720,7 +720,7 @@
               <option>Otro</option>
             </select>
           </div>
-          <div class="field floating"><textarea placeholder=" "></textarea><label>Mensaje</label></div>
+          <div class="field floating"><textarea name="mensaje" placeholder=" "></textarea><label>Mensaje</label></div>
           <button type="submit" class="btn">Solicitar una propuesta <span class="btn-arrow">→</span></button>
           <p class="form-status" style="margin-top:16px; font-size:15px; color:var(--gray);"></p>
         </form>
@@ -739,7 +739,7 @@
           <a class="social-btn" href="https://instagram.com/adminbiliaria" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/></svg>
           </a>
-          <a class="social-btn" href="https://wa.me/5218100000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <a class="social-btn" href="https://wa.me/528121046592" target="_blank" rel="noopener" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5c0 9 7 16 16 16l2-4-5-3-2 2c-2-1-4-3-5-5l2-2-3-5z"/></svg>
           </a>
         </div>
@@ -758,7 +758,7 @@
       <div class="footer-col">
         <h4>Contacto</h4>
         <ul>
-          <li style="color:var(--ivory); font-weight:500;">[ Teléfono de contacto ]</li>
+          <li style="color:var(--ivory); font-weight:500;"><a href="tel:+528121046592" style="color:inherit;">+52 81 2104 6592</a></li>
           <li style="color:var(--ivory); font-weight:500;">info@adminbiliaria.com</li>
           <li style="color:var(--ivory); font-weight:500;">San Pedro Garza García, N.L.</li>
           <li style="color:var(--gray-on-dark); font-weight:500; font-size:14.5px;">Lun–vie, 9:00 am–6:00 pm</li>
@@ -768,7 +768,7 @@
         <h4>Síguenos</h4>
         <ul>
           <li><a href="https://instagram.com/adminbiliaria" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://wa.me/5218100000000" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://wa.me/528121046592" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
       </div>
     </div>
@@ -835,7 +835,8 @@
     }
   });
 
-  // ---------- REVEAL ----------
+  const CONTACT_FORM_ENDPOINT = 'https://formspree.io/f/PENDIENTE';
+
   function submitContactForm(e, form){
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
@@ -844,18 +845,35 @@
     const original = btn.innerHTML;
     btn.classList.add('is-loading');
     btn.innerHTML = '<span class="btn-spinner"></span> Enviando';
-    setTimeout(()=>{
+    if(status){ status.style.color = 'var(--gray)'; status.textContent = ''; }
+
+    fetch(CONTACT_FORM_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
       btn.classList.remove('is-loading');
-      btn.classList.add('is-success');
-      btn.innerHTML = '<span class="btn-check">✓</span> Enviado';
-      if(status){ status.textContent = 'Gracias — nos pondremos en contacto pronto.'; }
-      setTimeout(()=>{
-        btn.classList.remove('is-success');
+      if(response.ok){
+        btn.classList.add('is-success');
+        btn.innerHTML = '<span class="btn-check">✓</span> Enviado';
+        if(status){ status.textContent = 'Gracias — nos pondremos en contacto pronto.'; }
+        form.reset();
+        setTimeout(()=>{
+          btn.classList.remove('is-success');
+          btn.innerHTML = original;
+        }, 2600);
+      } else {
         btn.innerHTML = original;
-      }, 2600);
-    }, 900);
+        if(status){ status.style.color = '#b3261e'; status.textContent = 'Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.'; }
+      }
+    }).catch(()=>{
+      btn.classList.remove('is-loading');
+      btn.innerHTML = original;
+      if(status){ status.style.color = '#b3261e'; status.textContent = 'Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.'; }
+    });
   }
 
+  // ---------- REVEAL ----------
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:0.12});
